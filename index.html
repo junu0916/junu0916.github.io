@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>haru</title>
     <style>
-      :root { --lime: #89CC04; }
+      :root {
+        --lime: #89CC04;
+
+        /* 전체 열화 강도(원하면 0.10~0.25 사이로 조절) */
+        --artifact-opacity: 0.18;
+
+        /* 블록(모자이크) 느낌 강도(원하면 0~0.10) */
+        --block-opacity: 0.045;
+      }
 
       html, body { height: 100%; }
 
@@ -20,8 +28,64 @@
         color: #000;
       }
 
+      /* ===== 화면 전체 "JPG 압축 열화" 오버레이 ===== */
+      body::before{
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: var(--artifact-opacity);
+        mix-blend-mode: soft-light;
+
+        /* 픽셀화된 노이즈(블록감 있는 turbulence) + 미세 노이즈 2겹 */
+        background-image:
+          url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Cfilter%20id='n'%20x='0'%20y='0'%20width='1'%20height='1'%20filterRes='7'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.6'%20numOctaves='1'%20seed='11'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='table'%20tableValues='0%200.9'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='96'%20height='96'%20filter='url(%23n)'/%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='128'%20height='128'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.95'%20numOctaves='1'%20seed='5'/%3E%3C/filter%3E%3Crect%20width='128'%20height='128'%20filter='url(%23n)'%20opacity='.6'/%3E%3C/svg%3E");
+        background-size: 96px 96px, 128px 128px;
+        background-repeat: repeat;
+
+        filter: contrast(1.15) saturate(1.05);
+        animation: artifactDrift 0.28s steps(1, end) infinite;
+      }
+
+      /* 아주 약한 8x8 블록 경계감(너무 티나면 --block-opacity를 0.02로) */
+      body::after{
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: var(--block-opacity);
+        mix-blend-mode: multiply;
+
+        background-image:
+          repeating-linear-gradient(0deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px),
+          repeating-linear-gradient(90deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px);
+        background-size: 8px 8px, 8px 8px;
+
+        animation: blockDrift 0.32s steps(1, end) infinite;
+      }
+
+      @keyframes artifactDrift{
+        0%   { background-position: 0 0,  0 0; }
+        25%  { background-position: 6px 0, 0 8px; }
+        50%  { background-position: 0 7px, 12px 0; }
+        75%  { background-position: 10px 10px, 6px 6px; }
+        100% { background-position: 0 0,  0 0; }
+      }
+
+      @keyframes blockDrift{
+        0%   { transform: translate(0,0); }
+        25%  { transform: translate(1px,0); }
+        50%  { transform: translate(0,1px); }
+        75%  { transform: translate(-1px,0); }
+        100% { transform: translate(0,0); }
+      }
+
       h1{
-        position: relative; /* pseudo 레이어용 */
+        position: relative;
+        z-index: 1; /* 오버레이 위로 */
         margin: 0;
         font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
@@ -36,89 +100,18 @@
         filter: blur(1.5px);
       }
 
-      /* --- JPG 블록 느낌용 픽셀 노이즈 텍스처 (SVG data URI, filterRes 낮춰 픽셀화) --- */
-      /* (배경/마스크에 공통 사용) */
-      @supports (background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'/%3E")) {
-        h1{
-          --jpeg-noise: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%3E%3Cfilter%20id='n'%20x='0'%20y='0'%20width='1'%20height='1'%20filterRes='8'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.9'%20numOctaves='1'%20seed='7'/%3E%3CfeComponentTransfer%3E%3CfeFuncR%20type='discrete'%20tableValues='0%20.35%20.7%201'/%3E%3CfeFuncG%20type='discrete'%20tableValues='0%20.35%20.7%201'/%3E%3CfeFuncB%20type='discrete'%20tableValues='0%20.35%20.7%201'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='64'%20height='64'%20filter='url(%23n)'%20opacity='.75'/%3E%3C/svg%3E");
-        }
-      }
-
-      /* 1) 블록 깨짐처럼 "일부 블록만 어긋난" 텍스트 복제 레이어 */
-      h1::before{
-        content: attr(data-text);
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        color: currentColor;
-        opacity: 0.35;
-
-        /* 블록 단위로만 드러나게 */
-        -webkit-mask-image: var(--jpeg-noise);
-        mask-image: var(--jpeg-noise);
-        -webkit-mask-size: 32px 32px;
-        mask-size: 32px 32px;
-        -webkit-mask-repeat: repeat;
-        mask-repeat: repeat;
-
-        /* 블록이 살짝 밀린 느낌 */
-        transform: translate(2px, -1px);
-        filter: blur(0.25px);
-        animation: macroShift 0.18s steps(1, end) infinite;
-      }
-
-      @keyframes macroShift{
-        0%   { -webkit-mask-position: 0 0;    mask-position: 0 0;    transform: translate(2px,-1px); }
-        25%  { -webkit-mask-position: 8px 0;  mask-position: 8px 0;  transform: translate(-1px,1px); }
-        50%  { -webkit-mask-position: 0 8px;  mask-position: 0 8px;  transform: translate(1px,0); }
-        75%  { -webkit-mask-position: 8px 8px;mask-position: 8px 8px;transform: translate(-2px,0); }
-        100% { -webkit-mask-position: 0 0;    mask-position: 0 0;    transform: translate(2px,-1px); }
-      }
-
-      /* 2) 글자 주변에만 "블록/그리드/픽셀 노이즈"가 보이도록 오버레이 */
-      h1::after{
-        content:"";
-        position:absolute;
-        inset:-26px;              /* 글자 주변 범위 */
-        pointer-events:none;
-        opacity: 0.30;
-
-        /* 픽셀 노이즈 + 8px 블록 그리드(가로/세로) */
-        background-image:
-          var(--jpeg-noise),
-          repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 8px),
-          repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 1px, transparent 1px 8px);
-        background-size: 64px 64px, 8px 8px, 8px 8px;
-        background-position: 0 0, 0 0, 0 0;
-
-        /* 글자 근처에만 남기기(부드럽게) */
-        -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 72%);
-        mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 72%);
-
-        filter: contrast(1.25) blur(0.2px);
-        animation: blockWobble 0.16s steps(1, end) infinite;
-      }
-
-      @keyframes blockWobble{
-        0%   { transform: translate(0,0);   background-position: 0 0,   0 0,   0 0; }
-        25%  { transform: translate(1px,0); background-position: 8px 0, 0 0,   0 0; }
-        50%  { transform: translate(-1px,1px); background-position: 0 8px, 0 0, 0 0; }
-        75%  { transform: translate(0,-1px); background-position: 8px 8px, 0 0, 0 0; }
-        100% { transform: translate(0,0);   background-position: 0 0,   0 0,   0 0; }
-      }
-
       /* 0.05초 동안만 적용될 플래시 테마 */
       body.flash-black { background: #000; color: var(--lime); }
       body.flash-white { background: #fff; color: var(--lime); }
 
-      /* 동작 줄이기 설정 시(점멸/노이즈 모두 중지) */
+      /* 동작 줄이기 설정 시 애니메이션/점멸 중지 */
       @media (prefers-reduced-motion: reduce){
-        body, h1::before, h1::after { animation: none !important; }
+        body::before, body::after { animation: none !important; }
       }
     </style>
   </head>
   <body>
-    <h1 data-text="haru">haru</h1>
+    <h1>haru</h1>
 
     <script>
       (() => {
