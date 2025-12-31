@@ -26,7 +26,7 @@
       }
 
       /* ===== 클릭 시 나타나는 "도트(검정 원) 사선 이동" 레이어 ===== */
-      #dots {
+      #dots{
         position: fixed;
         inset: 0;
         z-index: 1;            /* 글자보다 뒤 */
@@ -34,25 +34,53 @@
         opacity: 0;
         transition: opacity 120ms linear;
 
-        /* 일정한 간격의 검정 원 */
-        background-image: radial-gradient(circle, rgba(0,0,0,0.95) 0 7px, transparent 8px);
-        background-size: 44px 44px; /* 원 간격 */
+        /* 원(반지름 10배: 7px -> 70px) */
+        background-image: radial-gradient(circle, rgba(0,0,0,0.95) 0 70px, transparent 71px);
+        background-size: 440px 440px; /* 간격도 함께 키우면 덜 답답함 */
         background-position: 0 0;
+
+        /* 원 자체에도 텍스트와 동일한 블러 */
+        filter: blur(1.5px);
       }
 
-      /* 켜졌을 때만 보이고, 사선으로 이동 */
-      body.dots-on #dots {
+      /* 원에도 “압축 열화” 같은 질감을 조금 얹기 */
+      #dots::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        pointer-events:none;
+        opacity: 0.22;
+        mix-blend-mode: multiply;
+
+        /* 블록/그레인 느낌(원 레이어 내부에만) */
+        background-image:
+          repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 10px),
+          repeating-linear-gradient(90deg, rgba(0,0,0,.22) 0 1px, transparent 1px 10px);
+        background-size: 10px 10px, 10px 10px;
+
+        filter: blur(0.3px);
+        animation: dotsArtifact 0.22s steps(1, end) infinite;
+      }
+
+      @keyframes dotsArtifact{
+        0%   { transform: translate(0,0); }
+        25%  { transform: translate(1px,0); }
+        50%  { transform: translate(0,1px); }
+        75%  { transform: translate(-1px,0); }
+        100% { transform: translate(0,0); }
+      }
+
+      body.dots-on #dots{
         opacity: 1;
-        animation: dotsMove 1.2s linear infinite; /* 속도 조절 */
+        animation: dotsMove 1.2s linear infinite;
       }
 
-      /* 사선(↘)로 지나가게 */
-      @keyframes dotsMove {
+      @keyframes dotsMove{
         from { background-position: 0 0; }
         to   { background-position: 220px 220px; }
       }
 
-      /* ===== 화면 전체 "JPG 압축 열화" 오버레이 ===== */
+      /* ===== 화면 전체 "JPG 압축 열화" 오버레이 (원/글자 모두에 적용됨) ===== */
       body::before{
         content: "";
         position: fixed;
@@ -77,7 +105,7 @@
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 2; /* before와 동일 레이어 */
+        z-index: 2;
         opacity: var(--block-opacity);
         mix-blend-mode: multiply;
 
@@ -107,9 +135,10 @@
 
       h1{
         position: relative;
-        z-index: 3; /* 최상단 */
+        z-index: 3;
         margin: 0;
         cursor: pointer;
+        user-select: none;
 
         font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
@@ -122,7 +151,6 @@
 
         transform: translateY(-2vh) scaleY(1.9);
         filter: blur(1.5px);
-        user-select: none;
       }
 
       /* 0.05초 동안만 적용될 플래시 테마 */
@@ -130,7 +158,7 @@
       body.flash-white { background: #fff; color: var(--lime); }
 
       @media (prefers-reduced-motion: reduce){
-        body::before, body::after, #dots { animation: none !important; }
+        body::before, body::after, #dots, #dots::after { animation: none !important; }
       }
     </style>
   </head>
@@ -144,12 +172,10 @@
         const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
         if (reduceMotion) return;
 
-        // haru 클릭 시 도트 레이어 토글
         document.getElementById("haru").addEventListener("click", () => {
           document.body.classList.toggle("dots-on");
         });
 
-        // 1초마다 한 번, 0.05초 동안만 검정/흰색 플래시 번갈아
         let toggle = false;
         setInterval(() => {
           toggle = !toggle;
