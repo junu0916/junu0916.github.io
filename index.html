@@ -15,8 +15,9 @@
         place-items: center;
         overflow: hidden;
 
-        /* 0.08s x 3 = 0.24s (3가지 테마 순환) */
-        animation: bgCycle 0.24s steps(1, end) infinite;
+        /* 기본 화면 */
+        background: var(--lime);
+        color: #000;
       }
 
       h1{
@@ -29,38 +30,39 @@
         text-transform: lowercase;
         font-size: clamp(64px, 20vw, 220px);
         line-height: 0.95;
+
+        /* 이전 설정 유지 */
         transform: translateY(-2vh) scaleY(1.9);
         filter: blur(1.5px);
-
-        animation: fgCycle 0.24s steps(1, end) infinite;
       }
 
-      /* 1) #89CC04 바탕 + 검정 글씨
-         2) 검정 바탕 + #89CC04 글씨
-         3) 흰색 바탕 + #89CC04 글씨 */
-      @keyframes bgCycle{
-        0%      { background: var(--lime); }
-        33.333% { background: #000; }
-        66.666% { background: #fff; }
-        100%    { background: var(--lime); }
-      }
-
-      @keyframes fgCycle{
-        0%      { color: #000; }
-        33.333% { color: var(--lime); }
-        66.666% { color: var(--lime); }
-        100%    { color: #000; }
-      }
-
-      /* 사용자가 '동작 줄이기' 설정한 경우 점멸 중지 */
-      @media (prefers-reduced-motion: reduce){
-        body, h1 { animation: none; }
-        body { background: var(--lime); }
-        h1 { color: #000; }
-      }
+      /* 0.05초 동안만 적용될 플래시 테마 */
+      body.flash-black { background: #000; color: var(--lime); }
+      body.flash-white { background: #fff; color: var(--lime); }
     </style>
   </head>
   <body>
     <h1>haru</h1>
+
+    <script>
+      (() => {
+        // 사용자가 '동작 줄이기' 설정이면 점멸 비활성화
+        const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+        if (reduceMotion) return;
+
+        let toggle = false; // false: black flash, true: white flash
+
+        setInterval(() => {
+          toggle = !toggle;
+
+          const cls = toggle ? "flash-white" : "flash-black";
+          document.body.classList.add(cls);
+
+          setTimeout(() => {
+            document.body.classList.remove(cls);
+          }, 50); // 0.05초
+        }, 1000); // 1초마다 1번
+      })();
+    </script>
   </body>
 </html>
