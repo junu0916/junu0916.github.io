@@ -4,20 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>haru</title>
+
+    <!-- Icons -->
+    <link rel="icon" href="./favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+
     <style>
       :root {
         --lime: #89CC04;
 
-        /* 디바이스에 따라 유동적으로 변하는 원 반지름 */
+        /* Responsive circle radius & spacing */
         --r: clamp(120px, 18vmin, 250px);
-
-        /* 원 간격(반지름 비례) */
         --step: calc(var(--r) * 4.68);
-
-        /* 원 이동 속도 */
         --dotSpeed: 1s;
 
-        /* 전체 열화 강도 */
+        /* Noise/artifact overlay */
         --artifact-opacity: 0.18;
         --block-opacity: 0.045;
       }
@@ -33,9 +36,11 @@
         background: var(--lime);
         color: #000;
 
+        /* circle color (switches on flash) */
         --dot: rgba(0,0,0,0.95);
       }
 
+      /* Moving circles (toggle by clicking text) */
       #dots{
         position: fixed;
         inset: 0;
@@ -86,6 +91,7 @@
         100% { transform: translate(0,0); }
       }
 
+      /* Full-screen “compression artifact” overlay */
       body::before{
         content: "";
         position: fixed;
@@ -158,6 +164,7 @@
         filter: blur(1.5px);
       }
 
+      /* Flash theme (0.05s every 1s) */
       body.flash-black{
         background: #000;
         color: var(--lime);
@@ -169,6 +176,7 @@
         color: var(--lime);
       }
 
+      /* Accessibility: respect reduced motion */
       @media (prefers-reduced-motion: reduce){
         body::before, body::after, #dots, #dots::after { animation: none !important; }
       }
@@ -179,7 +187,7 @@
     <div id="dots" aria-hidden="true"></div>
     <h1 id="haru">haru</h1>
 
-    <!-- ✅ 반복재생: loop -->
+    <!-- Audio (looping) -->
     <audio id="bgm" src="assets/audio/song.mp3" preload="metadata" loop></audio>
 
     <script>
@@ -189,10 +197,9 @@
         const haru = document.getElementById("haru");
         const audio = document.getElementById("bgm");
 
-        // haru 클릭: 원 토글 + 음악 토글
+        // Click: toggle circles + toggle music
         haru.addEventListener("click", async () => {
           document.body.classList.toggle("dots-on");
-
           try {
             if (audio.paused) await audio.play();
             else audio.pause();
@@ -201,7 +208,7 @@
           }
         });
 
-        // 1초마다 0.05초 플래시(검정/흰색 번갈아) - reduce-motion이면 끔
+        // Flash (skip if reduced motion)
         if (!reduceMotion) {
           let toggle = false;
           setInterval(() => {
