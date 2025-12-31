@@ -8,6 +8,15 @@
       :root {
         --lime: #89CC04;
 
+        /* 디바이스에 따라 유동적으로 변하는 원 반지름 */
+        --r: clamp(120px, 18vmin, 250px);
+
+        /* 원 간격(반지름 비례) */
+        --step: calc(var(--r) * 4.68);
+
+        /* ✅ 원 이동 속도 (원래 1.6s -> 1s) */
+        --dotSpeed: 1s;
+
         /* 전체 열화 강도 */
         --artifact-opacity: 0.18;
         --block-opacity: 0.045;
@@ -21,46 +30,38 @@
         place-items: center;
         overflow: hidden;
 
-        /* 기본 화면 */
         background: var(--lime);
         color: #000;
 
-        /* 기본 원 색(검정) */
         --dot: rgba(0,0,0,0.95);
       }
 
-      /* ===== 클릭 시 나타나는 "원(검정) 사선 이동" 레이어 ===== */
       #dots{
         position: fixed;
         inset: 0;
-        z-index: 1;            /* 글자보다 뒤 */
+        z-index: 1;
         pointer-events: none;
         opacity: 0;
         transition: opacity 120ms linear;
 
-        /* 원 반지름 250px */
-        background-image: radial-gradient(circle, var(--dot) 0 250px, transparent 251px);
-
-        /* ✅ 간격 1.3배 (900 -> 1170) */
-        background-size: 1170px 1170px;
+        background-image: radial-gradient(circle, var(--dot) 0 var(--r), transparent calc(var(--r) + 1px));
+        background-size: var(--step) var(--step);
         background-position: 0 0;
 
-        /* ✅ 원 블러 증가 (1.5 -> 6) */
+        /* ✅ 원 블러 (6px -> 3.5px) */
         filter: blur(3.5px);
       }
 
       body.dots-on #dots{
         opacity: 1;
-        animation: dotsMove 1s linear infinite;
+        animation: dotsMove var(--dotSpeed) linear infinite;
       }
 
-      /* 사선(↘)로 이동 */
       @keyframes dotsMove{
         from { background-position: 0 0; }
-        to   { background-position: 1170px 1170px; } /* background-size와 동일 */
+        to   { background-position: var(--step) var(--step); }
       }
 
-      /* 원에도 살짝 "열화/블록" 질감 덧입히기 */
       #dots::after{
         content:"";
         position:absolute;
@@ -86,13 +87,12 @@
         100% { transform: translate(0,0); }
       }
 
-      /* ===== 화면 전체 "JPG 압축 열화" 오버레이 ===== */
       body::before{
         content: "";
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 2; /* dots 위, 글자 아래 */
+        z-index: 2;
         opacity: var(--artifact-opacity);
         mix-blend-mode: soft-light;
 
@@ -159,15 +159,12 @@
         filter: blur(1.5px);
       }
 
-      /* ===== 0.05초 플래시 테마 ===== */
-      /* 검정 바탕 플래시 때: 원을 흰색으로 */
       body.flash-black{
         background: #000;
         color: var(--lime);
         --dot: rgba(255,255,255,0.95);
       }
 
-      /* 흰 바탕 플래시 때(원은 기본값(검정) 유지) */
       body.flash-white{
         background: #fff;
         color: var(--lime);
@@ -188,12 +185,10 @@
         const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
         if (reduceMotion) return;
 
-        // haru 클릭 시 원 레이어 토글
         document.getElementById("haru").addEventListener("click", () => {
           document.body.classList.toggle("dots-on");
         });
 
-        // 1초마다 0.05초 플래시(검정/흰색 번갈아)
         let toggle = false;
         setInterval(() => {
           toggle = !toggle;
