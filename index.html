@@ -15,12 +15,12 @@
         place-items: center;
         overflow: hidden;
 
-        /* 기본 화면 */
         background: var(--lime);
         color: #000;
       }
 
       h1{
+        position: relative; /* pseudo-element 레이어를 위해 */
         margin: 0;
         font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
@@ -31,14 +31,61 @@
         font-size: clamp(64px, 20vw, 220px);
         line-height: 0.95;
 
-        /* 이전 설정 유지 */
         transform: translateY(-2vh) scaleY(1.9);
         filter: blur(1.5px);
+      }
+
+      /* "저화질/노이즈" 레이어: 글자 주변에만 얹기 */
+      h1::after{
+        content: "";
+        position: absolute;
+        inset: -18px;               /* 글자 주변으로 퍼지는 범위 */
+        pointer-events: none;
+        opacity: 0.35;              /* 노이즈 강도 */
+        mix-blend-mode: multiply;   /* 배경/글자와 섞이게 */
+
+        /* 랜덤한 점무늬/그레인 느낌 */
+        background-image:
+          repeating-linear-gradient(
+            0deg,
+            rgba(0,0,0,.18) 0px,
+            rgba(0,0,0,.18) 1px,
+            transparent 1px,
+            transparent 3px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,.10) 0px,
+            rgba(255,255,255,.10) 1px,
+            transparent 1px,
+            transparent 4px
+          );
+
+        /* 글자 실루엣 근처에만 남기도록 마스크(부드러운 가장자리) */
+        -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 70%);
+        mask-image: radial-gradient(circle, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 70%);
+
+        filter: blur(0.4px); /* 노이즈가 약간 퍼지게 */
+        animation: noiseJitter 0.12s steps(2, end) infinite;
+      }
+
+      /* 노이즈가 "압축 깨짐"처럼 미세하게 흔들리게 */
+      @keyframes noiseJitter{
+        0%   { transform: translate(0,0); }
+        25%  { transform: translate(1px,-1px); }
+        50%  { transform: translate(-1px,1px); }
+        75%  { transform: translate(2px,0); }
+        100% { transform: translate(0,0); }
       }
 
       /* 0.05초 동안만 적용될 플래시 테마 */
       body.flash-black { background: #000; color: var(--lime); }
       body.flash-white { background: #fff; color: var(--lime); }
+
+      /* 사용자가 '동작 줄이기' 설정한 경우 점멸/노이즈 중지 */
+      @media (prefers-reduced-motion: reduce){
+        body, h1::after { animation: none !important; }
+      }
     </style>
   </head>
   <body>
@@ -46,7 +93,6 @@
 
     <script>
       (() => {
-        // 사용자가 '동작 줄이기' 설정이면 점멸 비활성화
         const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
         if (reduceMotion) return;
 
