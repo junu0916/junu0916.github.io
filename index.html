@@ -5,11 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>haru</title>
 
-    <!-- Icons -->
+    <!-- ✅ Icons -->
     <link rel="icon" href="./favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="./favicon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+
+    <!-- ✅ Social preview (OG / Twitter)
+         IMPORTANT: Replace YOUR_PAGES_URL with your real GitHub Pages URL.
+         Example (user page): https://username.github.io/
+         Example (project page): https://username.github.io/repo/ -->
+    <meta property="og:title" content="haru">
+    <meta property="og:description" content="haru">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://YOUR_PAGES_URL/">
+    <meta property="og:image" content="https://YOUR_PAGES_URL/assets/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="haru">
+    <meta name="twitter:description" content="haru">
+    <meta name="twitter:image" content="https://YOUR_PAGES_URL/assets/og.png">
 
     <style>
       :root {
@@ -20,7 +37,7 @@
         --step: calc(var(--r) * 4.68);
         --dotSpeed: 1s;
 
-        /* Noise/artifact overlay */
+        /* Artifact overlay */
         --artifact-opacity: 0.18;
         --block-opacity: 0.045;
       }
@@ -36,7 +53,6 @@
         background: var(--lime);
         color: #000;
 
-        /* circle color (switches on flash) */
         --dot: rgba(0,0,0,0.95);
       }
 
@@ -176,7 +192,7 @@
         color: var(--lime);
       }
 
-      /* Accessibility: respect reduced motion */
+      /* Accessibility */
       @media (prefers-reduced-motion: reduce){
         body::before, body::after, #dots, #dots::after { animation: none !important; }
       }
@@ -187,7 +203,7 @@
     <div id="dots" aria-hidden="true"></div>
     <h1 id="haru">haru</h1>
 
-    <!-- Audio (looping) -->
+    <!-- ✅ Audio (looping) -->
     <audio id="bgm" src="assets/audio/song.mp3" preload="metadata" loop></audio>
 
     <script>
