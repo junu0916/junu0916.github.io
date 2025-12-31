@@ -5,33 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>haru</title>
     <style>
-      :root{
-        --bg: #89CC04;
-        --ink: #111111;
-      }
+      :root { --ink: #111111; }
 
       html, body { height: 100%; }
 
       body{
         margin: 0;
-        background: var(--bg);
         display: grid;
         place-items: center;
         overflow: hidden;
+
+        /* 0.05초마다 흑/백 점멸 */
+        animation: flash 0.1s steps(1, end) infinite;
       }
 
-      body::before{
-        content:"";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.10;
-        background-image:
-          radial-gradient(rgba(0,0,0,.25) 1px, transparent 1px),
-          radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px);
-        background-size: 3px 3px, 4px 4px;
-        background-position: 0 0, 1px 1px;
-        mix-blend-mode: multiply;
+      @keyframes flash{
+        0%   { background: #000; }
+        50%  { background: #fff; }
+        100% { background: #000; }
       }
 
       h1{
@@ -39,19 +30,13 @@
         color: var(--ink);
         font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
-
         font-kerning: normal;
         font-feature-settings: "kern" 1, "liga" 1;
-
         letter-spacing: -0.03em;
         text-transform: lowercase;
         font-size: clamp(64px, 20vw, 220px);
         line-height: 0.95;
-
-        /* 세로로 90% 늘리기 */
         transform: translateY(-2vh) scaleY(1.9);
-
-        /* 블러 1.5 */
         filter: blur(1.5px);
       }
     </style>
