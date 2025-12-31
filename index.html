@@ -38,26 +38,26 @@
         opacity: 0;
         transition: opacity 120ms linear;
 
-        /* 원 반지름 350px */
-        background-image: radial-gradient(circle, var(--dot) 0 350px, transparent 351px);
+        /* 원 반지름 250px */
+        background-image: radial-gradient(circle, var(--dot) 0 250px, transparent 251px);
 
-        /* 간격(원 크기에 맞게) */
-        background-size: 900px 900px;
+        /* ✅ 간격 1.3배 (900 -> 1170) */
+        background-size: 1170px 1170px;
         background-position: 0 0;
 
-        /* 원에도 텍스트와 동일한 블러 */
-        filter: blur(1.5px);
+        /* ✅ 원 블러 증가 (1.5 -> 6) */
+        filter: blur(3.5px);
       }
 
       body.dots-on #dots{
         opacity: 1;
-        animation: dotsMove 1.6s linear infinite;
+        animation: dotsMove 1s linear infinite;
       }
 
       /* 사선(↘)로 이동 */
       @keyframes dotsMove{
         from { background-position: 0 0; }
-        to   { background-position: 900px 900px; } /* background-size와 동일하면 반복이 자연스러움 */
+        to   { background-position: 1170px 1170px; } /* background-size와 동일 */
       }
 
       /* 원에도 살짝 "열화/블록" 질감 덧입히기 */
