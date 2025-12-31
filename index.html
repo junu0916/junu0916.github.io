@@ -6,7 +6,7 @@
     <title>haru</title>
     <style>
       :root{
-        --brat-green: #B8F000; /* 라임 그린 톤 */
+        --bg: #89CC04;
         --ink: #111111;
       }
 
@@ -14,7 +14,7 @@
 
       body{
         margin: 0;
-        background: var(--brat-green);
+        background: var(--bg);
         display: grid;
         place-items: center;
         overflow: hidden;
@@ -38,16 +38,25 @@
       h1{
         margin: 0;
         color: var(--ink);
-        font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+
+        /* Arial Narrow 우선, 없으면 Arial로 대체 */
+        font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
+
+        /* 커닝/합자 활성화(가능한 범위 내) */
+        font-kerning: normal;
+        font-feature-settings: "kern" 1, "liga" 1;
+
         letter-spacing: -0.03em;
         text-transform: lowercase;
         font-size: clamp(64px, 20vw, 220px);
         line-height: 0.95;
 
-        /* 살짝 뭉개지는 느낌(너무 과하면 blur 값 줄이세요) */
-        filter: blur(0.7px);
-        transform: translateY(-2vh);
+        /* 가로로 90% 늘리기 (1.0 -> 1.9) */
+        transform: translateY(-2vh) scaleX(1.9);
+
+        /* 블러 더 강하게 */
+        filter: blur(2.2px);
       }
     </style>
   </head>
