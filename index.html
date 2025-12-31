@@ -8,10 +8,8 @@
       :root {
         --lime: #89CC04;
 
-        /* 전체 열화 강도(원하면 0.10~0.25 사이로 조절) */
+        /* 전체 열화 강도 */
         --artifact-opacity: 0.18;
-
-        /* 블록(모자이크) 느낌 강도(원하면 0~0.10) */
         --block-opacity: 0.045;
       }
 
@@ -23,9 +21,35 @@
         place-items: center;
         overflow: hidden;
 
-        /* 기본 화면 */
         background: var(--lime);
         color: #000;
+      }
+
+      /* ===== 클릭 시 나타나는 "도트(검정 원) 사선 이동" 레이어 ===== */
+      #dots {
+        position: fixed;
+        inset: 0;
+        z-index: 1;            /* 글자보다 뒤 */
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 120ms linear;
+
+        /* 일정한 간격의 검정 원 */
+        background-image: radial-gradient(circle, rgba(0,0,0,0.95) 0 7px, transparent 8px);
+        background-size: 44px 44px; /* 원 간격 */
+        background-position: 0 0;
+      }
+
+      /* 켜졌을 때만 보이고, 사선으로 이동 */
+      body.dots-on #dots {
+        opacity: 1;
+        animation: dotsMove 1.2s linear infinite; /* 속도 조절 */
+      }
+
+      /* 사선(↘)로 지나가게 */
+      @keyframes dotsMove {
+        from { background-position: 0 0; }
+        to   { background-position: 220px 220px; }
       }
 
       /* ===== 화면 전체 "JPG 압축 열화" 오버레이 ===== */
@@ -34,11 +58,10 @@
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 0;
+        z-index: 2; /* dots 위, 글자 아래 */
         opacity: var(--artifact-opacity);
         mix-blend-mode: soft-light;
 
-        /* 픽셀화된 노이즈(블록감 있는 turbulence) + 미세 노이즈 2겹 */
         background-image:
           url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Cfilter%20id='n'%20x='0'%20y='0'%20width='1'%20height='1'%20filterRes='7'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.6'%20numOctaves='1'%20seed='11'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='table'%20tableValues='0%200.9'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='96'%20height='96'%20filter='url(%23n)'/%3E%3C/svg%3E"),
           url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='128'%20height='128'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.95'%20numOctaves='1'%20seed='5'/%3E%3C/filter%3E%3Crect%20width='128'%20height='128'%20filter='url(%23n)'%20opacity='.6'/%3E%3C/svg%3E");
@@ -49,13 +72,12 @@
         animation: artifactDrift 0.28s steps(1, end) infinite;
       }
 
-      /* 아주 약한 8x8 블록 경계감(너무 티나면 --block-opacity를 0.02로) */
       body::after{
         content: "";
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 0;
+        z-index: 2; /* before와 동일 레이어 */
         opacity: var(--block-opacity);
         mix-blend-mode: multiply;
 
@@ -85,8 +107,10 @@
 
       h1{
         position: relative;
-        z-index: 1; /* 오버레이 위로 */
+        z-index: 3; /* 최상단 */
         margin: 0;
+        cursor: pointer;
+
         font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
         font-kerning: normal;
@@ -98,37 +122,41 @@
 
         transform: translateY(-2vh) scaleY(1.9);
         filter: blur(1.5px);
+        user-select: none;
       }
 
       /* 0.05초 동안만 적용될 플래시 테마 */
       body.flash-black { background: #000; color: var(--lime); }
       body.flash-white { background: #fff; color: var(--lime); }
 
-      /* 동작 줄이기 설정 시 애니메이션/점멸 중지 */
       @media (prefers-reduced-motion: reduce){
-        body::before, body::after { animation: none !important; }
+        body::before, body::after, #dots { animation: none !important; }
       }
     </style>
   </head>
+
   <body>
-    <h1>haru</h1>
+    <div id="dots" aria-hidden="true"></div>
+    <h1 id="haru">haru</h1>
 
     <script>
       (() => {
         const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
         if (reduceMotion) return;
 
-        let toggle = false; // false: black flash, true: white flash
+        // haru 클릭 시 도트 레이어 토글
+        document.getElementById("haru").addEventListener("click", () => {
+          document.body.classList.toggle("dots-on");
+        });
 
+        // 1초마다 한 번, 0.05초 동안만 검정/흰색 플래시 번갈아
+        let toggle = false;
         setInterval(() => {
           toggle = !toggle;
           const cls = toggle ? "flash-white" : "flash-black";
           document.body.classList.add(cls);
-
-          setTimeout(() => {
-            document.body.classList.remove(cls);
-          }, 50); // 0.05초
-        }, 1000); // 1초마다 1번
+          setTimeout(() => document.body.classList.remove(cls), 50);
+        }, 1000);
       })();
     </script>
   </body>
