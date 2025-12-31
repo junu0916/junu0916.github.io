@@ -20,7 +20,6 @@
         overflow: hidden;
       }
 
-      /* 은은한 그레인(질감) */
       body::before{
         content:"";
         position: fixed;
@@ -38,12 +37,9 @@
       h1{
         margin: 0;
         color: var(--ink);
-
-        /* Arial Narrow 우선, 없으면 Arial로 대체 */
         font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
 
-        /* 커닝/합자 활성화(가능한 범위 내) */
         font-kerning: normal;
         font-feature-settings: "kern" 1, "liga" 1;
 
@@ -52,11 +48,11 @@
         font-size: clamp(64px, 20vw, 220px);
         line-height: 0.95;
 
-        /* 가로로 90% 늘리기 (1.0 -> 1.9) */
-        transform: translateY(-2vh) scaleX(1.9);
+        /* 세로로 90% 늘리기 */
+        transform: translateY(-2vh) scaleY(1.9);
 
-        /* 블러 더 강하게 */
-        filter: blur(2.2px);
+        /* 블러 1.5 */
+        filter: blur(1.5px);
       }
     </style>
   </head>
