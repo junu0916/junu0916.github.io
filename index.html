@@ -7,109 +7,144 @@
     <style>
       :root {
         --lime: #89CC04;
+
+        /* 디바이스에 따라 유동적으로 변하는 원 반지름 */
         --r: clamp(120px, 18vmin, 250px);
+
+        /* 원 간격(반지름 비례) */
         --step: calc(var(--r) * 4.68);
+
+        /* 원 이동 속도 */
         --dotSpeed: 1s;
+
+        /* 전체 열화 강도 */
         --artifact-opacity: 0.18;
         --block-opacity: 0.045;
       }
+
       html, body { height: 100%; }
+
       body{
         margin: 0;
         display: grid;
         place-items: center;
         overflow: hidden;
+
         background: var(--lime);
         color: #000;
+
         --dot: rgba(0,0,0,0.95);
       }
+
       #dots{
-        position: fixed; inset: 0;
+        position: fixed;
+        inset: 0;
         z-index: 1;
         pointer-events: none;
         opacity: 0;
         transition: opacity 120ms linear;
+
         background-image: radial-gradient(circle, var(--dot) 0 var(--r), transparent calc(var(--r) + 1px));
         background-size: var(--step) var(--step);
         background-position: 0 0;
+
         filter: blur(3.5px);
       }
+
       body.dots-on #dots{
         opacity: 1;
         animation: dotsMove var(--dotSpeed) linear infinite;
       }
+
       @keyframes dotsMove{
         from { background-position: 0 0; }
         to   { background-position: var(--step) var(--step); }
       }
+
       #dots::after{
         content:"";
-        position:absolute; inset:0;
+        position:absolute;
+        inset:0;
         pointer-events:none;
         opacity: 0.18;
         mix-blend-mode: multiply;
+
         background-image:
           repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 12px),
           repeating-linear-gradient(90deg, rgba(0,0,0,.22) 0 1px, transparent 1px 12px);
         background-size: 12px 12px, 12px 12px;
+
         filter: blur(0.3px);
         animation: dotsArtifact 0.22s steps(1, end) infinite;
       }
+
       @keyframes dotsArtifact{
-        0% { transform: translate(0,0); }
-        25% { transform: translate(1px,0); }
-        50% { transform: translate(0,1px); }
-        75% { transform: translate(-1px,0); }
+        0%   { transform: translate(0,0); }
+        25%  { transform: translate(1px,0); }
+        50%  { transform: translate(0,1px); }
+        75%  { transform: translate(-1px,0); }
         100% { transform: translate(0,0); }
       }
+
       body::before{
-        content:"";
-        position: fixed; inset:0;
-        pointer-events:none;
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
         z-index: 2;
         opacity: var(--artifact-opacity);
         mix-blend-mode: soft-light;
+
         background-image:
           url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Cfilter%20id='n'%20x='0'%20y='0'%20width='1'%20height='1'%20filterRes='7'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.6'%20numOctaves='1'%20seed='11'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='table'%20tableValues='0%200.9'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='96'%20height='96'%20filter='url(%23n)'/%3E%3C/svg%3E"),
           url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='128'%20height='128'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.95'%20numOctaves='1'%20seed='5'/%3E%3C/filter%3E%3Crect%20width='128'%20height='128'%20filter='url(%23n)'%20opacity='.6'/%3E%3C/svg%3E");
         background-size: 96px 96px, 128px 128px;
         background-repeat: repeat;
+
         filter: contrast(1.15) saturate(1.05);
-        animation: artifactDrift 0.28s steps(1,end) infinite;
+        animation: artifactDrift 0.28s steps(1, end) infinite;
       }
+
       body::after{
-        content:"";
-        position: fixed; inset:0;
-        pointer-events:none;
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
         z-index: 2;
         opacity: var(--block-opacity);
         mix-blend-mode: multiply;
+
         background-image:
           repeating-linear-gradient(0deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px),
           repeating-linear-gradient(90deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px);
         background-size: 8px 8px, 8px 8px;
-        animation: blockDrift 0.32s steps(1,end) infinite;
+
+        animation: blockDrift 0.32s steps(1, end) infinite;
       }
+
       @keyframes artifactDrift{
-        0% { background-position: 0 0, 0 0; }
-        25% { background-position: 6px 0, 0 8px; }
-        50% { background-position: 0 7px, 12px 0; }
-        75% { background-position: 10px 10px, 6px 6px; }
-        100% { background-position: 0 0, 0 0; }
+        0%   { background-position: 0 0,  0 0; }
+        25%  { background-position: 6px 0, 0 8px; }
+        50%  { background-position: 0 7px, 12px 0; }
+        75%  { background-position: 10px 10px, 6px 6px; }
+        100% { background-position: 0 0,  0 0; }
       }
+
       @keyframes blockDrift{
-        0% { transform: translate(0,0); }
-        25% { transform: translate(1px,0); }
-        50% { transform: translate(0,1px); }
-        75% { transform: translate(-1px,0); }
+        0%   { transform: translate(0,0); }
+        25%  { transform: translate(1px,0); }
+        50%  { transform: translate(0,1px); }
+        75%  { transform: translate(-1px,0); }
         100% { transform: translate(0,0); }
       }
+
       h1{
         position: relative;
         z-index: 3;
         margin: 0;
         cursor: pointer;
         user-select: none;
+
         font-family: "Arial Narrow", Arial, system-ui, sans-serif;
         font-weight: 900;
         font-kerning: normal;
@@ -118,18 +153,22 @@
         text-transform: lowercase;
         font-size: clamp(64px, 20vw, 220px);
         line-height: 0.95;
+
         transform: translateY(-2vh) scaleY(1.9);
         filter: blur(1.5px);
       }
+
       body.flash-black{
         background: #000;
         color: var(--lime);
         --dot: rgba(255,255,255,0.95);
       }
+
       body.flash-white{
         background: #fff;
         color: var(--lime);
       }
+
       @media (prefers-reduced-motion: reduce){
         body::before, body::after, #dots, #dots::after { animation: none !important; }
       }
@@ -140,8 +179,8 @@
     <div id="dots" aria-hidden="true"></div>
     <h1 id="haru">haru</h1>
 
-    <!-- ✅ 오디오를 body 안에 -->
-    <audio id="bgm" src="assets/audio/song.mp3" preload="metadata"></audio>
+    <!-- ✅ 반복재생: loop -->
+    <audio id="bgm" src="assets/audio/song.mp3" preload="metadata" loop></audio>
 
     <script>
       (() => {
@@ -158,11 +197,11 @@
             if (audio.paused) await audio.play();
             else audio.pause();
           } catch (e) {
-            console.log(e); // 자동재생 정책/파일 경로 문제 등
+            console.log(e);
           }
         });
 
-        // 플래시(사용자 설정이 reduce-motion이면 끔)
+        // 1초마다 0.05초 플래시(검정/흰색 번갈아) - reduce-motion이면 끔
         if (!reduceMotion) {
           let toggle = false;
           setInterval(() => {
