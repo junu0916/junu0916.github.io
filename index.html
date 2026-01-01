@@ -1,279 +1,292 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">&lt;!doctype html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="utf-8" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;haru&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ✅ Icons --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="icon" href="./favicon.ico" sizes="any"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="icon" type="image/png" sizes="192x192" href="./favicon-192.png"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ✅ Social preview (OG / Twitter)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>IMPORTANT: Replace YOUR_PAGES_URL with your real GitHub Pages URL.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>Example (user page): https://username.github.io/</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">         </span>Example (project page): https://username.github.io/repo/ --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta property="og:title" content="haru"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta property="og:description" content="haru"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta property="og:type" content="website"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta property="og:url" content="https://YOUR_PAGES_URL/"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta property="og:image" content="https://YOUR_PAGES_URL/assets/og.png"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta property="og:image:width" content="1200"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta property="og:image:height" content="630"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="twitter:card" content="summary_large_image"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="twitter:title" content="haru"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="twitter:description" content="haru"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="twitter:image" content="https://YOUR_PAGES_URL/assets/og.png"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>:root {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--lime: #89CC04;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Responsive circle radius &amp; spacing */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--r: clamp(120px, 18vmin, 250px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--step: calc(var(--r) * 4.68);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--dotSpeed: 1s;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Artifact overlay */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--artifact-opacity: 0.18;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--block-opacity: 0.045;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>html, body { height: 100%; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>body{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>margin: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>display: grid;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>place-items: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>overflow: hidden;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background: var(--lime);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>color: #000;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--dot: rgba(0,0,0,0.95);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>/* Moving circles (toggle by clicking text) */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>#dots{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>position: fixed;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>inset: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>z-index: 1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>pointer-events: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>opacity: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>transition: opacity 120ms linear;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-image: radial-gradient(circle, var(--dot) 0 var(--r), transparent calc(var(--r) + 1px));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-size: var(--step) var(--step);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-position: 0 0;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>filter: blur(3.5px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>body.dots-on #dots{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>opacity: 1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>animation: dotsMove var(--dotSpeed) linear infinite;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>@keyframes dotsMove{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>from { background-position: 0 0; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>to <span class="Apple-converted-space">  </span>{ background-position: var(--step) var(--step); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>#dots::after{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>content:"";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>position:absolute;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>inset:0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>pointer-events:none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>opacity: 0.18;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>mix-blend-mode: multiply;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-image:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 12px),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>repeating-linear-gradient(90deg, rgba(0,0,0,.22) 0 1px, transparent 1px 12px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-size: 12px 12px, 12px 12px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>filter: blur(0.3px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>animation: dotsArtifact 0.22s steps(1, end) infinite;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>@keyframes dotsArtifact{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>0% <span class="Apple-converted-space">  </span>{ transform: translate(0,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>25%<span class="Apple-converted-space">  </span>{ transform: translate(1px,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>50%<span class="Apple-converted-space">  </span>{ transform: translate(0,1px); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>75%<span class="Apple-converted-space">  </span>{ transform: translate(-1px,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>100% { transform: translate(0,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>/* Full-screen “compression artifact” overlay */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>body::before{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>content: "";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>position: fixed;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>inset: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>pointer-events: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>z-index: 2;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>opacity: var(--artifact-opacity);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>mix-blend-mode: soft-light;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-image:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Cfilter%20id='n'%20x='0'%20y='0'%20width='1'%20height='1'%20filterRes='7'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.6'%20numOctaves='1'%20seed='11'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='table'%20tableValues='0%200.9'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='96'%20height='96'%20filter='url(%23n)'/%3E%3C/svg%3E"),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='128'%20height='128'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.95'%20numOctaves='1'%20seed='5'/%3E%3C/filter%3E%3Crect%20width='128'%20height='128'%20filter='url(%23n)'%20opacity='.6'/%3E%3C/svg%3E");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-size: 96px 96px, 128px 128px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-repeat: repeat;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>filter: contrast(1.15) saturate(1.05);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>animation: artifactDrift 0.28s steps(1, end) infinite;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>body::after{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>content: "";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>position: fixed;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>inset: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>pointer-events: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>z-index: 2;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>opacity: var(--block-opacity);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>mix-blend-mode: multiply;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-image:</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>repeating-linear-gradient(0deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>repeating-linear-gradient(90deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background-size: 8px 8px, 8px 8px;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>animation: blockDrift 0.32s steps(1, end) infinite;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>@keyframes artifactDrift{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>0% <span class="Apple-converted-space">  </span>{ background-position: 0 0,<span class="Apple-converted-space">  </span>0 0; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>25%<span class="Apple-converted-space">  </span>{ background-position: 6px 0, 0 8px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>50%<span class="Apple-converted-space">  </span>{ background-position: 0 7px, 12px 0; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>75%<span class="Apple-converted-space">  </span>{ background-position: 10px 10px, 6px 6px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>100% { background-position: 0 0,<span class="Apple-converted-space">  </span>0 0; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>@keyframes blockDrift{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>0% <span class="Apple-converted-space">  </span>{ transform: translate(0,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>25%<span class="Apple-converted-space">  </span>{ transform: translate(1px,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>50%<span class="Apple-converted-space">  </span>{ transform: translate(0,1px); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>75%<span class="Apple-converted-space">  </span>{ transform: translate(-1px,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>100% { transform: translate(0,0); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>h1{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>position: relative;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>z-index: 3;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>margin: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>cursor: pointer;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>user-select: none;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-family: "Arial Narrow", Arial, system-ui, sans-serif;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-weight: 900;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-kerning: normal;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-feature-settings: "kern" 1, "liga" 1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>letter-spacing: -0.03em;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>text-transform: lowercase;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-size: clamp(64px, 20vw, 220px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>line-height: 0.95;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>transform: translateY(-2vh) scaleY(1.9);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>filter: blur(1.5px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>/* Flash theme (0.05s every 1s) */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>body.flash-black{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background: #000;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>color: var(--lime);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>--dot: rgba(255,255,255,0.95);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>body.flash-white{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>background: #fff;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>color: var(--lime);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>/* Accessibility */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>@media (prefers-reduced-motion: reduce){</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body::before, body::after, #dots, #dots::after { animation: none !important; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/head&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="dots" aria-hidden="true"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1 id="haru"&gt;haru&lt;/h1&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- ✅ Audio (looping) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;audio id="bgm" src="assets/audio/song.mp3" preload="metadata" loop&gt;&lt;/audio&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>(() =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const haru = document.getElementById("haru");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const audio = document.getElementById("bgm");</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// --- click vs dblclick 분리 (더블클릭 시 토글/재생이 2번 먹는 것 방지) ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let clickTimer = null;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const CLICK_DELAY = 220;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const doToggle = async () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>document.body.classList.toggle("dots-on");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>try {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (audio.paused) await audio.play();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>else audio.pause();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>} catch (e) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>console.log(e);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Single click: toggle circles + toggle music</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>haru.addEventListener("click", () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>if (clickTimer) return;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>clickTimer = setTimeout(() =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>clickTimer = null;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>void doToggle();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>}, CLICK_DELAY);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Double click: go to /about/</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>haru.addEventListener("dblclick", (e) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>e.preventDefault();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>if (clickTimer) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>clearTimeout(clickTimer);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>clickTimer = null;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>window.location.href = "about/";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Flash (skip if reduced motion)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if (!reduceMotion) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>let toggle = false;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>setInterval(() =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>toggle = !toggle;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const cls = toggle ? "flash-white" : "flash-black";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.body.classList.add(cls);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; document.body.classList.remove(cls), 50);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>}, 1000);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>})();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>haru</title>
+
+    <!-- ✅ Icons -->
+    <link rel="icon" href="./favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+
+    <!-- ✅ Social preview (원하면 YOUR_PAGES_URL 교체) -->
+    <meta property="og:title" content="haru">
+    <meta property="og:description" content="haru">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://YOUR_PAGES_URL/">
+    <meta property="og:image" content="https://YOUR_PAGES_URL/assets/og.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="haru">
+    <meta name="twitter:description" content="haru">
+    <meta name="twitter:image" content="https://YOUR_PAGES_URL/assets/og.png">
+
+    <style>
+      :root {
+        --lime: #89CC04;
+
+        /* Responsive circle radius & spacing */
+        --r: clamp(120px, 18vmin, 250px);
+        --step: calc(var(--r) * 4.68);
+        --dotSpeed: 1s;
+
+        /* Artifact overlay */
+        --artifact-opacity: 0.18;
+        --block-opacity: 0.045;
+      }
+
+      html, body { height: 100%; }
+
+      body{
+        margin: 0;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+
+        background: var(--lime);
+        color: #000;
+
+        --dot: rgba(0,0,0,0.95);
+      }
+
+      /* Moving circles (toggle by clicking text) */
+      #dots{
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 120ms linear;
+
+        background-image: radial-gradient(circle, var(--dot) 0 var(--r), transparent calc(var(--r) + 1px));
+        background-size: var(--step) var(--step);
+        background-position: 0 0;
+
+        filter: blur(3.5px);
+      }
+
+      body.dots-on #dots{
+        opacity: 1;
+        animation: dotsMove var(--dotSpeed) linear infinite;
+      }
+
+      @keyframes dotsMove{
+        from { background-position: 0 0; }
+        to   { background-position: var(--step) var(--step); }
+      }
+
+      #dots::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        pointer-events:none;
+        opacity: 0.18;
+        mix-blend-mode: multiply;
+
+        background-image:
+          repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 12px),
+          repeating-linear-gradient(90deg, rgba(0,0,0,.22) 0 1px, transparent 1px 12px);
+        background-size: 12px 12px, 12px 12px;
+
+        filter: blur(0.3px);
+        animation: dotsArtifact 0.22s steps(1, end) infinite;
+      }
+
+      @keyframes dotsArtifact{
+        0%   { transform: translate(0,0); }
+        25%  { transform: translate(1px,0); }
+        50%  { transform: translate(0,1px); }
+        75%  { transform: translate(-1px,0); }
+        100% { transform: translate(0,0); }
+      }
+
+      /* Full-screen “compression artifact” overlay */
+      body::before{
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2;
+        opacity: var(--artifact-opacity);
+        mix-blend-mode: soft-light;
+
+        background-image:
+          url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Cfilter%20id='n'%20x='0'%20y='0'%20width='1'%20height='1'%20filterRes='7'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.6'%20numOctaves='1'%20seed='11'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='table'%20tableValues='0%200.9'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='96'%20height='96'%20filter='url(%23n)'/%3E%3C/svg%3E"),
+          url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='128'%20height='128'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.95'%20numOctaves='1'%20seed='5'/%3E%3C/filter%3E%3Crect%20width='128'%20height='128'%20filter='url(%23n)'%20opacity='.6'/%3E%3C/svg%3E");
+        background-size: 96px 96px, 128px 128px;
+        background-repeat: repeat;
+
+        filter: contrast(1.15) saturate(1.05);
+        animation: artifactDrift 0.28s steps(1, end) infinite;
+      }
+
+      body::after{
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2;
+        opacity: var(--block-opacity);
+        mix-blend-mode: multiply;
+
+        background-image:
+          repeating-linear-gradient(0deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px),
+          repeating-linear-gradient(90deg, rgba(0,0,0,.35) 0 1px, transparent 1px 8px);
+        background-size: 8px 8px, 8px 8px;
+
+        animation: blockDrift 0.32s steps(1, end) infinite;
+      }
+
+      @keyframes artifactDrift{
+        0%   { background-position: 0 0,  0 0; }
+        25%  { background-position: 6px 0, 0 8px; }
+        50%  { background-position: 0 7px, 12px 0; }
+        75%  { background-position: 10px 10px, 6px 6px; }
+        100% { background-position: 0 0,  0 0; }
+      }
+
+      @keyframes blockDrift{
+        0%   { transform: translate(0,0); }
+        25%  { transform: translate(1px,0); }
+        50%  { transform: translate(0,1px); }
+        75%  { transform: translate(-1px,0); }
+        100% { transform: translate(0,0); }
+      }
+
+      h1{
+        position: relative;
+        z-index: 3;
+        margin: 0;
+        cursor: pointer;
+
+        /* ✅ 선택/롱프레스/더블탭 확대 방지(브라우저 호환) */
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -webkit-touch-callout: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+
+        font-family: "Arial Narrow", Arial, system-ui, sans-serif;
+        font-weight: 900;
+        font-kerning: normal;
+        font-feature-settings: "kern" 1, "liga" 1;
+        letter-spacing: -0.03em;
+        text-transform: lowercase;
+        font-size: clamp(64px, 20vw, 220px);
+        line-height: 0.95;
+
+        transform: translateY(-2vh) scaleY(1.9);
+        filter: blur(1.5px);
+      }
+
+      /* Flash theme (0.05s every 1s) */
+      body.flash-black{
+        background: #000;
+        color: var(--lime);
+        --dot: rgba(255,255,255,0.95);
+      }
+
+      body.flash-white{
+        background: #fff;
+        color: var(--lime);
+      }
+
+      @media (prefers-reduced-motion: reduce){
+        body::before, body::after, #dots, #dots::after { animation: none !important; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="dots" aria-hidden="true"></div>
+    <h1 id="haru">haru</h1>
+
+    <audio id="bgm" src="assets/audio/song.mp3" preload="metadata" loop></audio>
+
+    <script>
+      (() => {
+        const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+        const haru = document.getElementById("haru");
+        const audio = document.getElementById("bgm");
+
+        const goAbout = () => { window.location.href = "about/"; };
+
+        // click vs dblclick 분리
+        let clickTimer = null;
+        const CLICK_DELAY = 220;
+        let suppressClickUntil = 0;
+
+        const doToggle = async () => {
+          document.body.classList.toggle("dots-on");
+          try {
+            if (audio.paused) await audio.play();
+            else audio.pause();
+          } catch (e) {
+            console.log(e);
+          }
+        };
+
+        // Single click: toggle
+        haru.addEventListener("click", () => {
+          if (Date.now() < suppressClickUntil) return;
+          if (clickTimer) return;
+
+          clickTimer = setTimeout(() => {
+            clickTimer = null;
+            void doToggle();
+          }, CLICK_DELAY);
+        });
+
+        // Desktop double click: navigate
+        haru.addEventListener("dblclick", (e) => {
+          e.preventDefault();
+          suppressClickUntil = Date.now() + 600;
+
+          if (clickTimer) {
+            clearTimeout(clickTimer);
+            clickTimer = null;
+          }
+          goAbout();
+        });
+
+        // Prevent selection/drag
+        haru.addEventListener("selectstart", (e) => e.preventDefault());
+        haru.addEventListener("dragstart", (e) => e.preventDefault());
+
+        // Mobile double-tap(터치) 지원
+        let lastTap = 0;
+        haru.addEventListener("touchend", (e) => {
+          const now = Date.now();
+          const dt = now - lastTap;
+          lastTap = now;
+
+          if (dt > 0 && dt < 300) {
+            e.preventDefault();
+            suppressClickUntil = Date.now() + 600;
+
+            if (clickTimer) {
+              clearTimeout(clickTimer);
+              clickTimer = null;
+            }
+            goAbout();
+          }
+        }, { passive: false });
+
+        // Flash (skip if reduced motion)
+        if (!reduceMotion) {
+          let toggle = false;
+          setInterval(() => {
+            toggle = !toggle;
+            const cls = toggle ? "flash-white" : "flash-black";
+            document.body.classList.add(cls);
+            setTimeout(() => document.body.classList.remove(cls), 50);
+          }, 1000);
+        }
+      })();
+    </script>
+  </body>
 </html>
