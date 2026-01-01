@@ -5,318 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>about</title>
 
-  <!-- ✅ Icons (루트에 있는 파일을 about에서 참조) -->
-  <link rel="icon" href="../favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-
-  <!-- ✅ Social preview (원하면 YOUR_PAGES_URL 교체) -->
-  <meta property="og:title" content="about">
-  <meta property="og:description" content="posts">
-  <meta property="og:type" content="website">
-  <!-- 예: https://username.github.io/  또는 https://username.github.io/repo/ -->
-  <meta property="og:url" content="https://YOUR_PAGES_URL/about/">
-  <meta property="og:image" content="https://YOUR_PAGES_URL/assets/og.png">
-
   <style>
-    :root{
-      --lime: #89CC04;
-      --ink: rgba(0,0,0,.92);
-      --line: rgba(0,0,0,.14);
-      --muted: rgba(0,0,0,.62);
-      --card: rgba(255,255,255,.18);
-      --card2: rgba(255,255,255,.10);
-      --radius: 18px;
-    }
+    :root { --lime: #89CC04; }
 
-    *{ box-sizing: border-box; }
-    html, body{ height: 100%; }
+    html, body { height: 100%; }
+
     body{
       margin: 0;
       background: var(--lime);
-      color: var(--ink);
+      color: #000;
       font-family: system-ui, -apple-system, Arial, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* 은은한 아티팩트(읽기 방해 안 되게) */
-    body::before{
-      content:"";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .10;
-      mix-blend-mode: soft-light;
-      background-image:
-        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Cfilter%20id='n'%20filterRes='7'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.6'%20numOctaves='1'%20seed='11'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='table'%20tableValues='0%200.9'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='96'%20height='96'%20filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 96px 96px;
-      filter: contrast(1.1);
     }
 
     .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 18px 56px;
-      position: relative;
-      z-index: 1;
-    }
-
-    header{
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .toprow{
+      padding: 24px 18px;
       display: flex;
-      align-items: baseline;
-      gap: 14px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start; /* ✅ 왼쪽 정렬 */
+      gap: 10px;
     }
 
-    .home{
-      text-decoration: none;
+    a{
       color: inherit;
-      opacity: .72;
-    }
-    .home:hover{ opacity: 1; }
-
-    h1{
-      margin: 0;
-      font-size: clamp(28px, 3.6vw, 44px);
-      letter-spacing: -0.02em;
-    }
-
-    .sub{
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 72ch;
-    }
-
-    .panel{
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      border: 1px solid rgba(0,0,0,.10);
-      border-radius: var(--radius);
-      padding: 14px;
-      backdrop-filter: blur(6px);
-    }
-
-    .controls{
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .searchRow{
-      display: grid;
-      grid-template-columns: 1fr 160px;
-      gap: 10px;
-    }
-
-    input[type="search"], select{
-      width: 100%;
-      border: 1px solid rgba(0,0,0,.18);
-      border-radius: 12px;
-      padding: 11px 12px;
-      background: rgba(255,255,255,.35);
-      color: var(--ink);
-      outline: none;
-    }
-    input[type="search"]::placeholder{ color: rgba(0,0,0,.45); }
-
-    input[type="search"]:focus, select:focus{
-      border-color: rgba(0,0,0,.35);
-      box-shadow: 0 0 0 3px rgba(0,0,0,.10);
-    }
-
-    .count{
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .list{
-      margin-top: 16px;
-      border-top: 1px solid var(--line);
-    }
-
-    .post{
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
-      align-items: start;
-    }
-
-    .date{
-      font-size: 13px;
-      color: var(--muted);
-      padding-top: 3px;
-      white-space: nowrap;
-    }
-
-    .title{
-      margin: 0 0 6px;
+      text-decoration: none;
       font-size: 18px;
+      font-weight: 700;
       letter-spacing: -0.01em;
     }
-
-    .title a{
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(0,0,0,.20);
-    }
-    .title a:hover{
-      border-bottom-color: rgba(0,0,0,.55);
-    }
-
-    .meta{
-      font-size: 13px;
-      color: var(--muted);
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .tag{
-      border: 1px solid rgba(0,0,0,.18);
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.22);
-    }
-
-    footer{
-      margin-top: 18px;
-      font-size: 12px;
-      color: var(--muted);
-      opacity: .9;
-    }
-
-    @media (max-width: 640px){
-      .searchRow{ grid-template-columns: 1fr; }
-      .post{ grid-template-columns: 1fr; gap: 6px; }
-      .date{ padding-top: 0; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      body::before{ display:none; }
-    }
+    a:hover{ text-decoration: underline; }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="toprow">
-        <a class="home" href="../">← home</a>
-        <h1>about</h1>
-      </div>
-      <p class="sub">
-        이 페이지는 글 목록(아카이브)입니다. 아래에서 검색하거나 태그로 걸러서 글을 선택할 수 있습니다.
-      </p>
-
-      <div class="panel controls" role="region" aria-label="Post controls">
-        <div class="searchRow">
-          <input id="q" type="search" placeholder="검색 (제목/요약/태그)" autocomplete="off" />
-          <select id="tag">
-            <option value="">태그: 전체</option>
-            <!-- 필요하면 태그를 추가하세요 -->
-            <option value="note">note</option>
-            <option value="diary">diary</option>
-            <option value="work">work</option>
-          </select>
-        </div>
-        <div class="count" id="count">0 posts</div>
-      </div>
-    </header>
-
-    <main class="list" id="list">
-      <!-- ✅ 글 목록: 아래 post 블록을 복사해서 추가하세요 -->
-      <!-- 규칙: href는 ./posts/<slug>/ 형태를 권장 -->
-      <article class="post" data-title="Hello, 2026" data-tags="note" data-desc="첫 글">
-        <div class="date">2026-01-01</div>
-        <div>
-          <h2 class="title"><a href="./posts/2026-01-01-hello/">Hello, 2026</a></h2>
-          <div class="meta">
-            <span class="tag">note</span>
-            <span>첫 글</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="post" data-title="Second post" data-tags="diary" data-desc="두 번째 글">
-        <div class="date">2026-01-02</div>
-        <div>
-          <h2 class="title"><a href="./posts/2026-01-02-second/">Second post</a></h2>
-          <div class="meta">
-            <span class="tag">diary</span>
-            <span>두 번째 글</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 예시 추가용(필요 없으면 삭제)
-      <article class="post" data-title="Work log" data-tags="work note" data-desc="작업 메모">
-        <div class="date">2026-01-10</div>
-        <div>
-          <h2 class="title"><a href="./posts/2026-01-10-work-log/">Work log</a></h2>
-          <div class="meta">
-            <span class="tag">work</span><span class="tag">note</span>
-            <span>작업 메모</span>
-          </div>
-        </div>
-      </article>
-      -->
-    </main>
-
-    <footer>
-      경로 규칙: 글 상세 페이지는 <code>about/posts/&lt;slug&gt;/index.html</code> 로 만들고,
-      목록에서는 <code>./posts/&lt;slug&gt;/</code> 로 링크하면 URL이 깔끔합니다.
-    </footer>
+    <a href="../">home</a>
+    <a href="./posts/20260101/">20260101</a>
   </div>
-
-  <script>
-    (() => {
-      const q = document.getElementById("q");
-      const tag = document.getElementById("tag");
-      const list = document.getElementById("list");
-      const count = document.getElementById("count");
-
-      const posts = Array.from(list.querySelectorAll(".post"));
-
-      function normalize(s){ return (s || "").toLowerCase().trim(); }
-
-      function apply(){
-        const query = normalize(q.value);
-        const t = normalize(tag.value);
-
-        let visible = 0;
-
-        posts.forEach(p => {
-          const title = normalize(p.dataset.title);
-          const desc  = normalize(p.dataset.desc);
-          const tags  = normalize(p.dataset.tags);
-
-          const matchQuery = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
-          const matchTag = !t || tags.split(/\s+/).includes(t);
-
-          const ok = matchQuery && matchTag;
-          p.style.display = ok ? "" : "none";
-          if(ok) visible++;
-        });
-
-        count.textContent = `${visible} post${visible === 1 ? "" : "s"}`;
-      }
-
-      q.addEventListener("input", apply);
-      tag.addEventListener("change", apply);
-      apply();
-    })();
-  </script>
 </body>
 </html>
