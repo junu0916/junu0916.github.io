@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap" rel="stylesheet" />
+  <title>haru</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: opacity 450ms ease;
+      z-index: 0;
+    }
+
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-family: "Jost", Arial, sans-serif;
+      font-size: clamp(72px, 18vw, 240px);
+      font-weight: 700;
+      line-height: 1;
+      color: #000;
+      text-transform: lowercase;
+      letter-spacing: -0.06em;
+      display: inline-block;
+      transform: scaleY(1.12);
+    }
+  </style>
+</head>
+<body>
+  <div id="bg" class="bg" aria-hidden="true"></div>
+  <h1>haru</h1>
+
+  <script>
+    const images = [
+      "/Photos/16348C11-4694-4CD5-B2AC-22FD359C9B06.JPG",
+      "/Photos/70E6ACD0-83E7-495E-AA1A-E2F204C9D743.JPG",
+      "/Photos/829C71A9-F415-47BB-A0B3-8B8BA6F026D9.JPG",
+      "/Photos/92BBBA0A-3942-4280-AD89-7AEBD53ADFE6.jpg",
+      "/Photos/A889146D-FA9A-4C41-B1B7-C21E8B9A6B5D.jpg",
+      "/Photos/BD55E6E6-D9C6-4933-B22A-3560936E50CA.jpg",
+      "/Photos/BD5BDAA2-680C-4DD5-A22E-75901E10874F.jpg",
+      "/Photos/CD68EDAA-F606-4BA7-A226-8D4A0420AA13.jpg",
+      "/Photos/E3DB69E3-8812-4504-9456-24CC5D962708.jpg",
+      "/Photos/EAB91292-38ED-48BF-B8B1-A6DC6A1C0D98.jpeg",
+      "/Photos/F1B6AA5C-F6E6-4054-A264-5E53230495B0.jpg",
+      "/Photos/IMG_0410jpg.jpg",
+      "/Photos/IMG_5323jpg.jpg",
+      "/Photos/IMG_5996.JPG",
+      "/Photos/IMG_7402.JPG",
+      "/Photos/IMG_7449.jpg",
+      "/Photos/IMG_7473.jpg",
+      "/Photos/SV101488.jpeg"
+    ];
+
+    const bg = document.getElementById("bg");
+    let index = 0;
+
+    if (images.length > 0) {
+      bg.style.backgroundImage = `url('${images[0]}')`;
+    }
+
+    setInterval(() => {
+      if (images.length < 2) return;
+      index = (index + 1) % images.length;
+      bg.style.opacity = "0.35";
+      setTimeout(() => {
+        bg.style.backgroundImage = `url('${images[index]}')`;
+        bg.style.opacity = "1";
+      }, 180);
+    }, 2000);
+  </script>
+</body>
+</html>
