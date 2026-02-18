@@ -49,6 +49,7 @@
       letter-spacing: -0.06em;
       display: inline-block;
       transform: scaleY(1.12);
+      cursor: pointer;
     }
   </style>
 </head>
@@ -79,6 +80,7 @@
     ];
 
     const bg = document.getElementById("bg");
+    const title = document.querySelector("h1");
     let index = 0;
 
     if (images.length > 0) {
@@ -90,6 +92,10 @@
       index = (index + 1) % images.length;
       bg.style.backgroundImage = `url('${images[index]}')`;
     }, 2000);
+
+    title.addEventListener("dblclick", () => {
+      window.location.href = "/posts/";
+    });
   </script>
 </body>
 </html>
