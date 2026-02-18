@@ -26,7 +26,6 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      transition: opacity 450ms ease;
       z-index: 0;
     }
 
@@ -60,7 +59,6 @@
   <script>
     const images = [
       "/Photos/16348C11-4694-4CD5-B2AC-22FD359C9B06.JPG",
-      "/Photos/70E6ACD0-83E7-495E-AA1A-E2F204C9D743.JPG",
       "/Photos/829C71A9-F415-47BB-A0B3-8B8BA6F026D9.JPG",
       "/Photos/92BBBA0A-3942-4280-AD89-7AEBD53ADFE6.jpg",
       "/Photos/A889146D-FA9A-4C41-B1B7-C21E8B9A6B5D.jpg",
@@ -70,7 +68,6 @@
       "/Photos/E3DB69E3-8812-4504-9456-24CC5D962708.jpg",
       "/Photos/EAB91292-38ED-48BF-B8B1-A6DC6A1C0D98.jpeg",
       "/Photos/F1B6AA5C-F6E6-4054-A264-5E53230495B0.jpg",
-      "/Photos/IMG_0410jpg.jpg",
       "/Photos/IMG_5323jpg.jpg",
       "/Photos/IMG_5996.JPG",
       "/Photos/IMG_7402.JPG",
@@ -89,11 +86,7 @@
     setInterval(() => {
       if (images.length < 2) return;
       index = (index + 1) % images.length;
-      bg.style.opacity = "0.35";
-      setTimeout(() => {
-        bg.style.backgroundImage = `url('${images[index]}')`;
-        bg.style.opacity = "1";
-      }, 180);
+      bg.style.backgroundImage = `url('${images[index]}')`;
     }, 2000);
   </script>
 </body>
